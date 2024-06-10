@@ -1,5 +1,8 @@
 package com.project.libraryApp.user.domain;
 
+import lombok.Getter;
+
+@Getter
 public class User {
 
     private String name;
