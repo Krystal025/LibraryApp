@@ -1,12 +1,23 @@
 package com.project.libraryApp.user.domain;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 
+@Entity  // @Entity : Spring이 해당 객체와 테이블을 같은 것으로 보게함 (Entity : DB에서 관리되어야할 데이티)
 @Getter
 public class User {
 
+    @Id  // Primary Key
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  // Auto Invrement
+    private Long id = null;
+
+    @Column(nullable = false, length = 20)
     private String name;
+
+    // age는 따로 설정할 내용이 없으므로 @Column 생략가능
     private Integer age;
+
+    protected User(){}
 
     // User 객체가 생성될 때마다 name과 age를 매개변수로 받음
     public User(String name, Integer age){
@@ -17,5 +28,9 @@ public class User {
         }
         this.name = name;
         this.age = age;
+    }
+
+    public void updateName(String name){
+        this.name =  name;
     }
 }

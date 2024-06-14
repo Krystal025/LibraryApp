@@ -4,3 +4,10 @@ spring:
     username: "root"
     password: "Sujeong88*"
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none   #Spring이 시작될때 DB와 매핑되는 객체의 데이터가 다를 경우 처리방식
+    properties:
+      show_sql: true  #JPA를 사용하여 sql을 날릴 때 보여줄지
+      format_sql: true  #sql을 보여줄 때 포맷형식으로 보여줄지
+      dialect: org.hibernate.dialect.MySQL8Dialect  #JPA가 DB마다 조금씩 다른 SQL을 수정해줌

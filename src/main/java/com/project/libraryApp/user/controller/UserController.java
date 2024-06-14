@@ -1,29 +1,23 @@
 package com.project.libraryApp.user.controller;
 
-import com.project.libraryApp.user.domain.User;
 import com.project.libraryApp.user.dto.request.UserCreateRequest;
 import com.project.libraryApp.user.dto.request.UserUpdateRequest;
 import com.project.libraryApp.user.dto.response.UserResponse;
-import com.project.libraryApp.user.service.UserService;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
+import com.project.libraryApp.user.service.UserServiceV1;
+import com.project.libraryApp.user.service.UserServiceV2;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class UserController {
 
-    private final UserService userService;
-    private final JdbcTemplate jdbcTemplate;
+    // @Autowired를 사용해도되지만 직접 생성자를 정의하는 것이 오류방지에 더 효과적임
+    private final UserServiceV2 userService;
 
     // 생성자를 만들어주면 JdbcTemplate이 자동으로 파라미터로 들어와 설정됨
-    public UserController(JdbcTemplate jdbcTemplate){
-        this.jdbcTemplate = jdbcTemplate;
-        this.userService = new UserService(jdbcTemplate);
+    public UserController(UserServiceV2 userService){
+        this.userService = userService;
     }
 
     // 사용자 등록 API
