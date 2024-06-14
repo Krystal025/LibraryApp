@@ -6,6 +6,7 @@ import com.project.libraryApp.user.dto.request.UserCreateRequest;
 import com.project.libraryApp.user.dto.request.UserUpdateRequest;
 import com.project.libraryApp.user.dto.response.UserResponse;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,11 +20,15 @@ public class UserServiceV2 {
         this.userRepository = userRepository;
     }
 
+    // @Transactional : 메소드가 예외없ㅇ이 잘 끝났다면 Commit, 에러가 발생한다면 Rollback
+    // 단, IOException과 같은 Checked Exception은 Rollback이 일어나지 않음
+    @Transactional
     // 사용자 등록 메소드
     public void saveUser(UserCreateRequest request){
         userRepository.save(new User(request.getName(), request.getAge()));
     }
 
+    @Transactional(readOnly = true)  // readOnly 설정시 데이터 변경 기능이 빠지므로 성능적 이점이 있음
     // 사용자 목록 조회 메소드
     public List<UserResponse> getUsers() {
         return userRepository.findAll().stream()
@@ -31,6 +36,7 @@ public class UserServiceV2 {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     // 사용자 이름 변경 메소드
     public void updateUser(UserUpdateRequest request){
         // User가 있다면 Optional<User>로 결과 반환, User가 없으면 Exception을 발생시킴
@@ -38,9 +44,10 @@ public class UserServiceV2 {
                 .orElseThrow(IllegalArgumentException::new);
 
         user.updateName(request.getName());
-        userRepository.save(user);
+        // userRepository.save(user);  (영속성 컨텍스트가 변경을 감지한 후 자동으로 저장)
     }
 
+    @Transactional
     // 사용자 삭제 메소드
     public void deleteUser(String name){
         User user = userRepository.findByName(name);
