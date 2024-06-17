@@ -2,6 +2,7 @@ package com.project.libraryApp.book.controller;
 
 import com.project.libraryApp.book.domain.Book;
 import com.project.libraryApp.book.dto.request.BookCreateRequest;
+import com.project.libraryApp.book.dto.request.BookLoanRequest;
 import com.project.libraryApp.book.service.BookService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,4 +21,9 @@ public class BookController {
     public void saveBook(@RequestBody BookCreateRequest request){
         bookService.saveBook(request);}
 
+
+    @PostMapping("/book/loan")
+    public void loanBook(@RequestBody BookLoanRequest request){
+        bookService.loanBook(request);
+    }
 }
