@@ -35,7 +35,7 @@ public class UserServiceV1 {
         userJdbcRepository.updateUserName(request.getName(), request.getId());
     }
 
-    // 사용자 사제 메소드
+    // 사용자 삭제 메소드
     public void deleteUser(String name){
         if (userJdbcRepository.isUserNotExist(name)) {
             throw new IllegalArgumentException();

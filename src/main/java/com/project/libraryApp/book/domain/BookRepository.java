@@ -9,4 +9,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     // SERLECT * FROM user_loan_history WHERE book_name = ? AND is_return = ?;
     Optional<Book> findByName(String bookName);
+
 }
