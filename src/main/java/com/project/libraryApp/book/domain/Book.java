@@ -1,7 +1,9 @@
 package com.project.libraryApp.book.domain;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class Book {
 
@@ -16,7 +18,7 @@ public class Book {
 
     public Book(String name){
         if (name == null || name.isEmpty()){
-            throw new IllegalArgumentException(String.format("잘못된 name(%s)이 들어왔습니ㅏㄷ.", name));
+            throw new IllegalArgumentException(String.format("잘못된 name(%s)이 들어왔습니다.", name));
         }
         this.name = name;
     };

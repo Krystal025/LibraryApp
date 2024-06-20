@@ -5,7 +5,7 @@ import lombok.Getter;
 @Getter
 public class BookReturnRequest {
 
-    private long userId;
-    private long bookId;
+    private String userName;
+    private String bookName;
 
 }

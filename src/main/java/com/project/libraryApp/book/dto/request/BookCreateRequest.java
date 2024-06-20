@@ -6,4 +6,5 @@ import lombok.Getter;
 public class BookCreateRequest {
 
     private String name;
+
 }
