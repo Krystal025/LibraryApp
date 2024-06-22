@@ -2,10 +2,12 @@ package com.project.libraryApp.user.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class UserLoanHistory {
 
@@ -13,18 +15,19 @@ public class UserLoanHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id = null;
 
-    @Column(nullable = false)
-    private long userId;
+    @JoinColumn
+    @ManyToOne
+    private User user;
 
     @Column(nullable = false)
-    private long bookId;
+    private String bookName;
 
     private boolean isReturn;  // "0:false, 1:true" 로 매핑됨
 
-    public UserLoanHistory(long userId, long bookId, boolean isReturn){
-        this.userId = userId;
-        this.bookId = bookId;
-        this.isReturn = isReturn;
+    public UserLoanHistory(User user, String bookName){
+        this.user = user;
+        this.bookName = bookName;
+        this.isReturn = false;
     }
 
     public void doReturn(){

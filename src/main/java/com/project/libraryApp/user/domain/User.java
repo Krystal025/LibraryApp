@@ -3,6 +3,9 @@ package com.project.libraryApp.user.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity  // @Entity : Spring이 해당 객체와 테이블을 같은 것으로 보게함 (Entity : DB에서 관리되어야할 데이티)
 @Getter
 public class User {
@@ -16,6 +19,9 @@ public class User {
 
     // age는 따로 설정할 내용이 없으므로 @Column 생략가능
     private Integer age;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserLoanHistory> userLoanHistories = new ArrayList<>();
 
     protected User(){}
 
@@ -32,5 +38,17 @@ public class User {
 
     public void updateName(String name){
         this.name =  name;
+    }
+
+    public void loanBook(String bookName){
+        this.userLoanHistories.add(new UserLoanHistory(this, bookName));
+    }
+
+    public void returnBook(String bookName){
+        UserLoanHistory targetHistory = this.userLoanHistories.stream()
+                .filter(history -> history.getBookName().equals(bookName))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException :: new);
+        targetHistory.doReturn();
     }
 }
