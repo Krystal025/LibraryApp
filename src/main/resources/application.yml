@@ -1,4 +1,28 @@
 spring:
+  config:
+    activate:
+      on-profile: local
+  datasource:
+    url: "jdbc:h2:mem:library;MODE=MYSQL;NON_KEYWORDS=USER"
+    username: "sa"
+    password: ""
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      show_sql: true  #JPA를 사용하여 sql을 날릴 때 보여줄지
+      format_sql: true  #sql을 보여줄 때 포맷형식으로 보여줄지
+      dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
   datasource:
     url: "jdbc:mysql://localhost/library"
     username: "root"
@@ -8,6 +32,6 @@ spring:
     hibernate:
       ddl-auto: none   #Spring이 시작될때 DB와 매핑되는 객체의 데이터가 다를 경우 처리방식
     properties:
-      show_sql: true  #JPA를 사용하여 sql을 날릴 때 보여줄지
-      format_sql: true  #sql을 보여줄 때 포맷형식으로 보여줄지
+      show_sql: true  #JPA를 통해 sql을 사용할때 콘솔창에 보여줌
+      format_sql: true  #sql을 보여줄 때 포맷형식으로 보여줌
       dialect: org.hibernate.dialect.MySQL8Dialect  #JPA가 DB마다 조금씩 다른 SQL을 수정해줌
