@@ -3,7 +3,7 @@
 <b>학습용 Toy Project "도서관리 웹 애플리케이션"</b>
 - 프로젝트 일정 : 2024/06/12 ~ 2024/06/26
 - 프로젝트 개발인원 : BackEnd 1명 
-- 프로젝트 URL : http://www.studying-developer.site:8080/v1/index.html
+- 프로젝트 도메인 : http://www.studying-developer.site:8080/v1/index.html
 - 프로젝트 GitHub : https://github.com/Krystal025/LibraryApp
 </br>
 
