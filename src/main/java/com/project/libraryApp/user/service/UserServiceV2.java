@@ -5,6 +5,7 @@ import com.project.libraryApp.user.domain.UserRepository;
 import com.project.libraryApp.user.dto.request.UserCreateRequest;
 import com.project.libraryApp.user.dto.request.UserUpdateRequest;
 import com.project.libraryApp.user.dto.response.UserResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,13 +13,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceV2 {
 
     private final UserRepository userRepository;
-
-    public UserServiceV2(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     // @Transactional : 메소드가 예외없ㅇ이 잘 끝났다면 Commit, 에러가 발생한다면 Rollback
     // 단, IOException과 같은 Checked Exception은 Rollback이 일어나지 않음

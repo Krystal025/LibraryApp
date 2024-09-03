@@ -9,24 +9,17 @@ import com.project.libraryApp.user.domain.User;
 import com.project.libraryApp.user.domain.UserLoanHistory;
 import com.project.libraryApp.user.domain.UserLoanHistoryRepository;
 import com.project.libraryApp.user.domain.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
+@RequiredArgsConstructor
 public class BookService {
 
     private final BookRepository bookRepository;
     private final UserLoanHistoryRepository userLoanHistoryRepository;
     private final UserRepository userRepository;
-
-    public BookService(BookRepository bookRepository, UserLoanHistoryRepository userLoanHistoryRepository, UserRepository userRepository){
-        this.bookRepository = bookRepository;
-        this.userLoanHistoryRepository = userLoanHistoryRepository;
-        this.userRepository = userRepository;
-    }
 
     // 도서 등록 메소드
     @Transactional

@@ -1,10 +1,13 @@
 package com.project.libraryApp.book.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Getter
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Book {
 
     @Id
@@ -13,8 +16,6 @@ public class Book {
 
     @Column(nullable = false)
     private String name;
-
-    protected Book(){};
 
     public Book(String name){
         if (name == null || name.isEmpty()){

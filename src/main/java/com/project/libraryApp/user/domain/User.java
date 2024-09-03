@@ -1,13 +1,16 @@
 package com.project.libraryApp.user.domain;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity  // @Entity : Spring이 해당 객체와 테이블을 같은 것으로 보게함 (Entity : DB에서 관리되어야할 데이티)
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
     @Id  // Primary Key
@@ -23,8 +26,6 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserLoanHistory> userLoanHistories = new ArrayList<>();
 
-    protected User(){}
-
     // User 객체가 생성될 때마다 name과 age를 매개변수로 받음
     public User(String name, Integer age){
         // name이 없다면 예외를 발생시킴 (= 생성되지 않음)
@@ -36,14 +37,17 @@ public class User {
         this.age = age;
     }
 
+    // 이름변경 메소드
     public void updateName(String name){
         this.name =  name;
     }
 
+    // 도서 대출 메소드
     public void loanBook(String bookName){
         this.userLoanHistories.add(new UserLoanHistory(this, bookName));
     }
 
+    //도서 반납 메소드
     public void returnBook(String bookName){
         UserLoanHistory targetHistory = this.userLoanHistories.stream()
                 .filter(history -> history.getBookName().equals(bookName))

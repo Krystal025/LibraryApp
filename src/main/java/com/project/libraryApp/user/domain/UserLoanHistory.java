@@ -1,14 +1,11 @@
 package com.project.libraryApp.user.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Entity
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserLoanHistory {
 
     @Id
@@ -30,7 +27,9 @@ public class UserLoanHistory {
         this.isReturn = false;
     }
 
+    // 도서 반납 상태값 변경 메소드
     public void doReturn(){
        this.isReturn = true;
     }
+
 }
